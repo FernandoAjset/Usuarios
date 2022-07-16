@@ -1,0 +1,61 @@
+﻿@model Usuarios.Models.Empleado;
+
+<h3>Crear un nuevo usuario</h3>
+<form asp-action="Crear">
+    <div class="col-md-4">
+        <label asp-for="CodigoEmpleado" class="form-label">Codigo de Empleado</label>
+        <input asp-for="CodigoEmpleado" class="form-control" required />
+        <span asp-validation-for="CodigoEmpleado" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Pais" class="form-label">Pais</label>
+        <input asp-for="Pais" class="form-control" required />
+        <span asp-validation-for="Pais" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Titulo" class="form-label">Titulo</label>
+        <input asp-for="Titulo" class="form-control" required />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="PrimerNombre" class="form-label">Primer Nombre</label>
+        <input asp-for="PrimerNombre" class="form-control" required />
+        <span asp-validation-for="PrimerNombre" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="SegundoNombre" class="form-label">Segundo Nombre</label>
+        <input asp-for="SegundoNombre" class="form-control" required />
+        <span asp-validation-for="SegundoNombre" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="PrimerApellido" class="form-label">Primer Apellido</label>
+        <input asp-for="PrimerApellido" class="form-control" required />
+        <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="SegundoApellido" class="form-label">Segundo Apellido</label>
+        <input asp-for="SegundoApellido" class="form-control" required />
+        <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input type="date" asp-for="FechaNacimiento" class="form-control" required />
+        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="TelefonoMovil" class="form-label">Telefono Movil</label>
+        <input asp-for="TelefonoMovil" class="form-control" required />
+        <span asp-validation-for="TelefonoMovil" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Volver</a>
+</form>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

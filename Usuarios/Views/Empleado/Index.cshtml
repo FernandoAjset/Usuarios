@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Usuarios.Models.Empleado>;
+
+
+@if (Model is not null)
+{
+    <a class="btn btn-primary mb-3" asp-action="Crear">Nuevo Usuario</a>
+
+    <table class="table">
+        <thead>
+            <tr class="table-dark">
+                <td>Codigo</td>
+                <td>Pais</td>
+                <td>Titulo</td>
+                <td>Primer Nombre</td>
+                <td>Segundo Nombre</td>
+                <td>Primer Apellido</td>
+                <td>Segundo Apellido</td>
+                <td>Email</td>
+                <td>Fecha de Nacimiento</td>
+                <td>Telefono Movil</td>
+                <td>Accion</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.CodigoEmpleado</td>
+                    <td>@usuario.Pais</td>
+                    <td>@usuario.Titulo</td>
+                    <td>@usuario.PrimerNombre</td>
+                    <td>@usuario.SegundoNombre</td>
+                    <td>@usuario.PrimerApellido</td>
+                    <td>@usuario.SegundoApellido</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.FechaNacimiento</td>
+                    <td>@usuario.TelefonoMovil</td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Editar" asp-route-id="@usuario.Id">Editar</a>
+                        <a class="btn btn-danger" asp-action="BorrarEmpleado" asp-route-id="@usuario.Id">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

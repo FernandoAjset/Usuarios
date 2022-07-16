@@ -1,0 +1,14 @@
+﻿@model Usuarios.Models.Empleado
+
+<form asp-action="Borrar">
+    <input type="hidden" asp-for="Id" />
+    <h3 class="text-danger">¿Esta seguro que desea eliminar el empleado?</h3>
+    <h1>Datos del empleado</h1>
+    <p>Codigo: @Model.CodigoEmpleado</p>
+    <p>Primer Nombre: @Model.PrimerNombre</p>
+    <p>Segundo Nombre: @Model.SegundoNombre</p>
+    <p>Primer Apellido: @Model.PrimerApellido</p>
+    <p>Segundo Apellido: @Model.SegundoApellido</p>
+    <button type="submit" class="btn btn-danger mt-2">Borrar</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Volver</a>
+</form>
