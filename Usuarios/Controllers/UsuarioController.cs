@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Usuarios.Models;
@@ -72,10 +73,6 @@ namespace Usuarios.Controllers
                 return View(modelo);
             }
         }
-
-        [HttpGet]
-
-
 
         [HttpPost]
         public async Task<IActionResult> LogOut()

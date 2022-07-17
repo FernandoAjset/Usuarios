@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -117,28 +118,5 @@ namespace Usuarios.Controllers
             }
             return View("NoEncontrado");
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> NombreExiste(Empleado empleado)
-        //{
-        //    var id = empleado.Id;
-        //    var httpClient = new HttpClient();
-        //    var json = await httpClient.GetStringAsync($"http://localhost/ApiUsuario/api/empleados/{empleado.Id}");
-
-        //    Empleado empleado = JsonConvert.DeserializeObject<Empleado>(json);
-
-        //    if (empleado is not null)
-        //    {
-        //        return View(empleado);
-        //    }
-
-
-        //    var existe = context.Vehiculos.Any(v => v.Matricula == vehiculo.Matricula);
-        //    if (existe)
-        //    {
-        //        return Json($"Ya existe un vehiculo con matricula {vehiculo.Matricula}");
-        //    }
-        //    return Json("true");
-        //}
     }
 }

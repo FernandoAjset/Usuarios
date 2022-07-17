@@ -1,10 +1,23 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Usuarios.Models;
 using Usuarios.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+////<[Fernando Ajset] Configuración para evitar que se pueda accedar a operaciones si no está logueado >
+//var politicaUsuariosAutenticados = new AuthorizationPolicyBuilder()
+//    .RequireAuthenticatedUser()
+//    .Build();
+//builder.Services.AddControllersWithViews(opciones =>
+//{
+//    opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
+//});
+////<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
+
 builder.Services.AddControllersWithViews();
 
 //<[Fernando Ajset] Configuración IdentityCore>
@@ -24,7 +37,7 @@ builder.Services.AddIdentityCore<Usuario>(opciones =>
 //<[Fernando Ajset] Configuración IdentityCore>
 
 
-//<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
+//<[Fernando Ajset] Configuración para uso de Cookies en aplicación y configurar path de Authorize>
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
