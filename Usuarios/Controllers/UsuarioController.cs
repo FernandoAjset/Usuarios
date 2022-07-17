@@ -17,6 +17,7 @@ namespace Usuarios.Controllers
             this.signInManager = signInManager;
         }
 
+        [AllowAnonymous] //Se agrega para poder ingresar a esta acción sin estar registrado
         [HttpGet]
         public IActionResult Registro()
         {
@@ -47,6 +48,7 @@ namespace Usuarios.Controllers
             }
         }
 
+        [AllowAnonymous] //Se agrega para poder ingresar a esta acción sin estar registrado
         [HttpGet]
         public IActionResult Login()
         {
@@ -74,6 +76,7 @@ namespace Usuarios.Controllers
             }
         }
 
+        [AllowAnonymous] //Se agrega para poder ingresar a esta acción sin estar registrado
         [HttpPost]
         public async Task<IActionResult> LogOut()
         {

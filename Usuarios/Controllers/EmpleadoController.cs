@@ -8,6 +8,8 @@ using Usuarios.Models;
 
 namespace Usuarios.Controllers
 {
+    //<[Fernando Ajset] Restricción de acceso a las acciones, para poder ingresar solo si se está autenticado.>
+    [Authorize]
     public class EmpleadoController : Controller
     {
         [HttpGet]

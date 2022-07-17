@@ -5,19 +5,6 @@ using Usuarios.Models;
 using Usuarios.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-////<[Fernando Ajset] Configuración para evitar que se pueda accedar a operaciones si no está logueado >
-//var politicaUsuariosAutenticados = new AuthorizationPolicyBuilder()
-//    .RequireAuthenticatedUser()
-//    .Build();
-//builder.Services.AddControllersWithViews(opciones =>
-//{
-//    opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
-//});
-////<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
-
 builder.Services.AddControllersWithViews();
 
 //<[Fernando Ajset] Configuración IdentityCore>
@@ -44,7 +31,10 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
     options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
 
-}).AddCookie(IdentityConstants.ApplicationScheme);
+}).AddCookie(IdentityConstants.ApplicationScheme, opciones =>
+{
+    opciones.LoginPath = "/usuario/login";
+});
 //<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
 
 var app = builder.Build();
