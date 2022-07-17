@@ -1,10 +1,38 @@
-using Usuarios.Entidades;
+using Microsoft.AspNetCore.Identity;
+using Usuarios.Models;
+using Usuarios.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ManejoUsuariosContext>();
+
+//<[Fernando Ajset] Configuración IdentityCore>
+builder.Services.AddTransient<IRepositorioUsuarios, RepositorioUsuarios>();
+builder.Services.AddTransient<IUserStore<Usuario>, UsuarioStore>();
+
+builder.Services.AddTransient<SignInManager<Usuario>>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddIdentityCore<Usuario>(opciones =>
+{
+    opciones.Password.RequireDigit = false;
+    opciones.Password.RequireLowercase = false;
+    opciones.Password.RequireUppercase = false;
+    opciones.Password.RequireNonAlphanumeric = false;
+});
+//<[Fernando Ajset] Configuración IdentityCore>
+
+
+//<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+
+}).AddCookie(IdentityConstants.ApplicationScheme);
+//<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
 
 var app = builder.Build();
 
@@ -21,10 +49,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
+app.UseAuthentication();
+//<[Fernando Ajset] Configuración para uso de Cookies en aplicación>
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Empleado}/{action=Index}/{id?}");
+    pattern: "{controller=Usuario}/{action=Login}/{id?}");
 
 app.Run();
