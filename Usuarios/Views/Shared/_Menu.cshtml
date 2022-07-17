@@ -1,0 +1,19 @@
+﻿@using System.Text.Json
+@using Microsoft.AspNetCore.Http
+
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Empleados
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" asp-action="Crear" asp-controller="Empleado">Creacion de Empleado </a></li>
+            <li><a class="dropdown-item" asp-action="Editar" asp-controller="Empleado">Modificacion de Empleado </a></li>
+            <li><a class="dropdown-item" asp-action="BorrarEmpleado" asp-controller="Empleado">Eliminacion de Empleado </a></li>
+        </ul>
+    </li>
+
+
+</ul>
