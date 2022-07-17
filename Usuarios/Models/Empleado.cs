@@ -17,7 +17,7 @@ namespace Usuarios.Models
         [NotMapped]
         public int Id { get; set; }
 
-        //[Remote(action: "NombreExiste", controller: "Empleado")]
+        [Remote(action: "NombreExiste", controller: "Empleado")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Codigo de empleado")]
         [StringLength(maximumLength: 10, ErrorMessage = "No puede ser mayor a {1} caracteres")]
@@ -69,5 +69,8 @@ namespace Usuarios.Models
         public string TelefonoMovil { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; }
+
+
+        //public byte[] Img { get; set; }
     }
 }

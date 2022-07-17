@@ -2,6 +2,14 @@
 
 <h3>Crear un nuevo usuario</h3>
 <form asp-action="Crear">
+
+@*    <div class="col-md-6">
+        <label asp-for="Img" class="form-label">Cargar Foto</label>
+        <input type="file" asp-for="Img" class="form-control" required accept="image/png, image/jpeg"/>
+        <span asp-validation-for="Img" class="text-danger"></span>
+    </div>*@
+
+
     <div class="col-md-4">
         <label asp-for="CodigoEmpleado" class="form-label">Codigo de Empleado</label>
         <input asp-for="CodigoEmpleado" class="form-control" required />
@@ -52,10 +60,12 @@
         <input asp-for="TelefonoMovil" class="form-control" required />
         <span asp-validation-for="TelefonoMovil" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+@*    <button type="submit" class="btn btn-primary mt-2">Enviar</button>*@
+
+        <button class="btn btn-primary mt-2">Enviar</button>
     <a asp-action="Index" class="btn btn-secondary mt-2">Volver</a>
 </form>
 
 @section Scripts{
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

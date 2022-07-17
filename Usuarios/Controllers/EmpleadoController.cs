@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Usuarios.Models;
 
@@ -36,6 +35,8 @@ namespace Usuarios.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Empleado nuevoEmpleado)
         {
+
+
             if (!ModelState.IsValid)
             {
                 return View(nuevoEmpleado);
@@ -119,6 +120,22 @@ namespace Usuarios.Controllers
                 return RedirectToAction("Index");
             }
             return View("NoEncontrado");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> NombreExiste(Empleado empleado)
+        {
+            var httpClient = new HttpClient();
+            var json = await httpClient.GetStringAsync($"http://localhost/ApiUsuario/api/empleados/{empleado.CodigoEmpleado}");
+            Empleado respuesta = new Empleado();
+            respuesta = JsonConvert.DeserializeObject<Empleado>(json);
+
+            if (!string.IsNullOrEmpty(respuesta.CodigoEmpleado))
+            {
+                return Json($"Ya existe un empleado con codigo {empleado.CodigoEmpleado}");
+            }
+            return Json("true");
         }
     }
 }
