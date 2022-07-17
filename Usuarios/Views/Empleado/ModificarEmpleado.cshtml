@@ -1,0 +1,10 @@
+﻿@model ModificarViewModel
+<h4>Editar un empleado</h4>
+<form asp-action="EditarEmpleado">
+    <div class="col-md-4">
+        <label asp-for="CodigoEmpleado" class="form-label">Introduzca el código del cliente para buscar</label>
+        <input asp-for="CodigoEmpleado" class="form-control" required />
+        <span asp-validation-for="CodigoEmpleado" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary mt-3">Buscar</button>
+</form>
