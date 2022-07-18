@@ -17,7 +17,7 @@ namespace Usuarios.Servicios
         public async Task<int> CrearUsuario(Usuario usuario)
         {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost/ApiUsuario/api/usuarios");
+            httpClient.BaseAddress = new Uri("http://www.ApiUsuario.somee.com/api/usuarios");
             var postJob = await httpClient.PostAsJsonAsync<Usuario>("usuarios", usuario);
 
             var identity = 0;
@@ -27,7 +27,7 @@ namespace Usuarios.Servicios
         public async Task<Usuario> ObtenerUsuario(string nombreUsuario)
         {
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync($"http://localhost/ApiUsuario/api/usuarios/{nombreUsuario}");
+            var json = await httpClient.GetStringAsync($"http://www.ApiUsuario.somee.com/api/usuarios/{nombreUsuario}");
             Usuario respuesta = new Usuario();
             respuesta = JsonConvert.DeserializeObject<Usuario>(json);
             return respuesta;
