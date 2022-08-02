@@ -10,14 +10,18 @@ namespace Usuarios.Servicios
     }
     public class RepositorioUsuarios : IRepositorioUsuarios
     {
+        private readonly IConfiguration configuration;
+        private readonly string URLApi;
+
         public RepositorioUsuarios(IConfiguration configuration)
         {
-
+            this.configuration = configuration;
+            this.URLApi = this.configuration["Direciones:API"];
         }
         public async Task<int> CrearUsuario(Usuario usuario)
         {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://www.ApiUsuario.somee.com/api/usuarios");
+            httpClient.BaseAddress = new Uri(URLApi + "api/usuarios");
             var postJob = await httpClient.PostAsJsonAsync<Usuario>("usuarios", usuario);
 
             var identity = 0;
@@ -27,7 +31,7 @@ namespace Usuarios.Servicios
         public async Task<Usuario> ObtenerUsuario(string nombreUsuario)
         {
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync($"http://www.ApiUsuario.somee.com/api/usuarios/{nombreUsuario}");
+            var json = await httpClient.GetStringAsync(URLApi + $"api/usuarios/{nombreUsuario}");
             Usuario respuesta = new Usuario();
             respuesta = JsonConvert.DeserializeObject<Usuario>(json);
             return respuesta;

@@ -11,12 +11,20 @@ namespace Usuarios.Controllers
     [Authorize]
     public class EmpleadoController : Controller
     {
+        private readonly IConfiguration configuration;
+        private readonly string URLApi;
+
+        public EmpleadoController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+            this.URLApi = this.configuration["Direciones:API"];
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //http://www.ApiUsuario.somee.com/api/empleados
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync("http://www.ApiUsuario.somee.com/api/empleados");
+            var json = await httpClient.GetStringAsync(URLApi + "api/empleados");
 
             List<Empleado> empleados = JsonConvert.DeserializeObject<List<Empleado>>(json);
 
@@ -42,7 +50,7 @@ namespace Usuarios.Controllers
                 return View(nuevoEmpleado);
             }
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://www.ApiUsuario.somee.com/api/empleados");
+            httpClient.BaseAddress = new Uri(URLApi + "api/empleados");
             var postJob = await httpClient.PostAsJsonAsync<Empleado>("empleados", nuevoEmpleado);
             var postResult = postJob.StatusCode;
             if (postResult == System.Net.HttpStatusCode.OK)
@@ -58,9 +66,8 @@ namespace Usuarios.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int Id)
         {
-            //http://www.ApiUsuario.somee.com/api/empleados
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync($"http://www.ApiUsuario.somee.com/api/empleados/{Id}");
+            var json = await httpClient.GetStringAsync(URLApi + $"api/empleados/{Id}");
 
             Empleado empleado = JsonConvert.DeserializeObject<Empleado>(json);
 
@@ -79,7 +86,7 @@ namespace Usuarios.Controllers
                 return View(empleado);
             }
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://www.ApiUsuario.somee.com/api/empleados");
+            httpClient.BaseAddress = new Uri(URLApi + "api/empleados");
             var putJob = await httpClient.PutAsJsonAsync<Empleado>("empleados", empleado);
             var putResult = putJob.StatusCode;
             if (putResult == System.Net.HttpStatusCode.OK)
@@ -95,9 +102,8 @@ namespace Usuarios.Controllers
         [HttpGet]
         public async Task<IActionResult> BorrarEmpleado(int Id)
         {
-            //http://www.ApiUsuario.somee.com/api/empleados
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync($"http://www.ApiUsuario.somee.com/api/empleados/{Id}");
+            var json = await httpClient.GetStringAsync(URLApi + $"api/empleados/{Id}");
 
             Empleado empleado = JsonConvert.DeserializeObject<Empleado>(json);
 
@@ -112,7 +118,7 @@ namespace Usuarios.Controllers
         public async Task<IActionResult> Borrar(int Id)
         {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://www.ApiUsuario.somee.com/api/");
+            httpClient.BaseAddress = new Uri(URLApi + "api/");
             var deleteTask = await httpClient.DeleteAsync("empleados/" + Id.ToString());
             var result = deleteTask.StatusCode;
             if (result == System.Net.HttpStatusCode.OK)
@@ -127,7 +133,7 @@ namespace Usuarios.Controllers
         public async Task<IActionResult> NombreExiste(Empleado empleado)
         {
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync($"http://www.ApiUsuario.somee.com/api/empleados/{empleado.CodigoEmpleado}");
+            var json = await httpClient.GetStringAsync(URLApi + $"api/empleados/{empleado.CodigoEmpleado}");
             Empleado respuesta = new Empleado();
             respuesta = JsonConvert.DeserializeObject<Empleado>(json);
 
